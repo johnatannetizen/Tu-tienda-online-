@@ -935,6 +935,24 @@ class StreamingStore {
       }
     });
 
+    // Admin tap access: 5 rapid taps on the header logo
+    const headerLogo = document.querySelector('.header .logo');
+    if (headerLogo) {
+      let tapCount = 0;
+      let tapTimer = null;
+      headerLogo.addEventListener('click', (e) => {
+        e.preventDefault();
+        tapCount++;
+        if (tapTimer) clearTimeout(tapTimer);
+        tapTimer = setTimeout(() => { tapCount = 0; }, 2000);
+        if (tapCount >= 5) {
+          tapCount = 0;
+          if (tapTimer) clearTimeout(tapTimer);
+          this.showAdminPanel();
+        }
+      });
+    }
+
     // Check URL hash
     window.addEventListener('hashchange', () => this.checkAdminAccess());
 

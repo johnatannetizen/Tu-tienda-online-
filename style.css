@@ -1816,8 +1816,8 @@ input:focus, select:focus, textarea:focus {
   color: white;
 }
 
-/* === Estrellas Fugaces Animadas === */
-.shooting-stars-container {
+/* === Atomos Flotantes Animados === */
+.atoms-container {
   position: fixed;
   top: 0;
   left: 0;
@@ -1828,119 +1828,164 @@ input:focus, select:focus, textarea:focus {
   overflow: hidden;
 }
 
-.shooting-star {
+.atom {
   position: absolute;
-  width: 2px;
-  height: 2px;
+  width: 30px;
+  height: 30px;
+  opacity: 0.4;
+  animation: atomFloat linear infinite;
+}
+
+.atom-nucleus {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 6px;
+  height: 6px;
+  background: var(--primary);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 6px var(--primary);
+}
+
+.atom-orbit {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border: 1px solid rgba(229, 9, 20, 0.3);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.atom-orbit-1 {
+  width: 22px;
+  height: 22px;
+  animation: atomOrbitSpin 3s linear infinite;
+}
+
+.atom-orbit-2 {
+  width: 30px;
+  height: 30px;
+  animation: atomOrbitSpin 4.5s linear infinite reverse;
+  transform: translate(-50%, -50%) rotate(60deg);
+}
+
+.atom-electron {
+  position: absolute;
+  top: -2px;
+  left: 50%;
+  width: 4px;
+  height: 4px;
   background: white;
   border-radius: 50%;
-  opacity: 0;
-  animation: shootingStar linear infinite;
+  transform: translateX(-50%);
+  box-shadow: 0 0 4px rgba(255, 255, 255, 0.8);
 }
 
-.shooting-star::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 40px;
-  height: 1px;
-  background: linear-gradient(to left, rgba(255, 255, 255, 0.8), transparent);
-  transform: rotate(-45deg);
-  transform-origin: left center;
+@keyframes atomOrbitSpin {
+  0% { transform: translate(-50%, -50%) rotate(0deg); }
+  100% { transform: translate(-50%, -50%) rotate(360deg); }
 }
 
-@keyframes shootingStar {
+@keyframes atomFloat {
   0% {
+    transform: translate(0, 0);
     opacity: 0;
-    transform: translate(0, 0) rotate(-45deg);
   }
-  5% {
-    opacity: 1;
+  10% {
+    opacity: 0.4;
   }
-  50% {
-    opacity: 0.6;
+  90% {
+    opacity: 0.4;
   }
   100% {
+    transform: translate(var(--float-x, 100px), var(--float-y, -200px));
     opacity: 0;
-    transform: translate(-300px, 300px) rotate(-45deg);
   }
 }
 
-.shooting-star:nth-child(1) {
-  top: 10%;
-  left: 30%;
-  animation-duration: 2.5s;
+.atom:nth-child(1) {
+  top: 15%;
+  left: 10%;
+  --float-x: 80px;
+  --float-y: -150px;
+  animation-duration: 18s;
   animation-delay: 0s;
 }
 
-.shooting-star:nth-child(2) {
-  top: 5%;
-  left: 60%;
-  animation-duration: 3s;
-  animation-delay: 1.5s;
+.atom:nth-child(2) {
+  top: 60%;
+  left: 85%;
+  --float-x: -60px;
+  --float-y: -180px;
+  animation-duration: 22s;
+  animation-delay: 2s;
 }
 
-.shooting-star:nth-child(3) {
-  top: 20%;
-  left: 80%;
-  animation-duration: 2.8s;
-  animation-delay: 3s;
+.atom:nth-child(3) {
+  top: 80%;
+  left: 30%;
+  --float-x: 50px;
+  --float-y: -250px;
+  animation-duration: 20s;
+  animation-delay: 4s;
 }
 
-.shooting-star:nth-child(4) {
-  top: 35%;
-  left: 45%;
-  animation-duration: 3.2s;
-  animation-delay: 4.5s;
-}
-
-.shooting-star:nth-child(5) {
-  top: 15%;
-  left: 90%;
-  animation-duration: 2.2s;
+.atom:nth-child(4) {
+  top: 40%;
+  left: 70%;
+  --float-x: -90px;
+  --float-y: -120px;
+  animation-duration: 25s;
   animation-delay: 6s;
 }
 
-.shooting-star:nth-child(6) {
-  top: 50%;
-  left: 25%;
-  animation-duration: 2.7s;
-  animation-delay: 7.5s;
+.atom:nth-child(5) {
+  top: 90%;
+  left: 50%;
+  --float-x: 30px;
+  --float-y: -300px;
+  animation-duration: 19s;
+  animation-delay: 8s;
 }
 
-.shooting-star:nth-child(7) {
-  top: 60%;
-  left: 70%;
-  animation-duration: 3.1s;
-  animation-delay: 9s;
+.atom:nth-child(6) {
+  top: 30%;
+  left: 20%;
+  --float-x: 100px;
+  --float-y: -100px;
+  animation-duration: 23s;
+  animation-delay: 10s;
 }
 
-.shooting-star:nth-child(8) {
-  top: 40%;
-  left: 15%;
-  animation-duration: 2.4s;
-  animation-delay: 10.5s;
-}
-
-.shooting-star:nth-child(9) {
-  top: 75%;
-  left: 55%;
-  animation-duration: 2.9s;
+.atom:nth-child(7) {
+  top: 70%;
+  left: 60%;
+  --float-x: -70px;
+  --float-y: -200px;
+  animation-duration: 21s;
   animation-delay: 12s;
 }
 
-.shooting-star:nth-child(10) {
-  top: 25%;
-  left: 50%;
-  animation-duration: 3.3s;
-  animation-delay: 13.5s;
+.atom:nth-child(8) {
+  top: 50%;
+  left: 5%;
+  --float-x: 120px;
+  --float-y: -160px;
+  animation-duration: 24s;
+  animation-delay: 14s;
 }
 
-[data-theme="light"] .shooting-star {
-  background: rgba(100, 100, 100, 0.5);
+[data-theme="light"] .atom-nucleus {
+  background: var(--primary);
+  box-shadow: 0 0 6px rgba(229, 9, 20, 0.4);
 }
 
-[data-theme="light"] .shooting-star::after {
-  background: linear-gradient(to left, rgba(100, 100, 100, 0.4), transparent);
+[data-theme="light"] .atom-orbit {
+  border-color: rgba(229, 9, 20, 0.2);
+}
+
+[data-theme="light"] .atom-electron {
+  background: var(--primary);
+  box-shadow: 0 0 4px rgba(229, 9, 20, 0.5);
 }
