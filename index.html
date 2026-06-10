@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <meta name="description" content="Tu Tienda - La mejor tienda de cuentas y suscripciones de streaming. Netflix, Spotify, Disney+ y mas a los mejores precios.">
+  <meta name="keywords" content="streaming, netflix, spotify, disney+, cuentas premium, suscripciones, iptv">
+  <meta name="author" content="Tu Tienda">
+  <meta name="theme-color" content="#e50914">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Tu Tienda">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Tu Tienda - Streaming Premium">
+  <meta property="og:description" content="Cuentas y suscripciones de streaming a los mejores precios. Entrega inmediata por WhatsApp.">
+  <meta property="og:type" content="website">
+
+  <!-- PWA Manifest -->
+  <link rel="manifest" href="manifest.json">
+
+  <title>Tu Tienda - Streaming Premium | Netflix, Spotify, Disney+ y mas</title>
+
+  <!-- Estilos -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ========== ESTRELLAS FUGACES ========== -->
+  <div class="shooting-stars-container">
+    <div class="shooting-star"></div>
+    <div class="shooting-star"></div>
+    <div class="shooting-star"></div>
+    <div class="shooting-star"></div>
+    <div class="shooting-star"></div>
+    <div class="shooting-star"></div>
+    <div class="shooting-star"></div>
+    <div class="shooting-star"></div>
+    <div class="shooting-star"></div>
+    <div class="shooting-star"></div>
+  </div>
+
+  <!-- ========== HEADER ========== -->
+  <header class="header">
+    <div class="container">
+      <!-- Logo -->
+      <a href="#" class="logo">
+        <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+          <rect width="32" height="32" rx="6" fill="#e50914"/>
+          <path d="M8 24V8l8 8-8 8zm8 0V8l8 8-8 8z" fill="white"/>
+        </svg>
+        <span>Tu Tienda</span>
+      </a>
+
+      <!-- Navegacion -->
+      <nav class="nav-menu" id="nav-menu">
+        <a href="#hero">Inicio</a>
+        <a href="#featured">Destacados</a>
+        <a href="#catalog">Catalogo</a>
+        <a href="#offers">Ofertas</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contact">Contacto</a>
+      </nav>
+
+      <!-- Acciones del Header -->
+      <div class="header-actions">
+        <!-- Busqueda -->
+        <div class="search-box">
+          <input type="text" id="search-input" placeholder="Buscar productos..." aria-label="Buscar productos">
+          <button id="search-toggle" aria-label="Buscar">🔍</button>
+        </div>
+
+        <!-- Tema -->
+        <button onclick="store.toggleTheme()" aria-label="Cambiar tema">
+          <span id="theme-icon">☀️</span>
+        </button>
+
+        <!-- Carrito -->
+        <button onclick="store.toggleCart()" aria-label="Ver carrito">
+          🛒
+          <span class="cart-count" id="cart-count" style="display:none;">0</span>
+        </button>
+
+        <!-- Hamburger (mobile) -->
+        <div class="hamburger" aria-label="Menu de navegacion">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ========== HERO / BANNER PRINCIPAL ========== -->
+  <section class="hero" id="hero">
+    <div class="container">
+      <div class="hero-content">
+        <span class="hero-badge">🔥 Ofertas Activas</span>
+        <h1 class="hero-title">
+          Tus servicios de <span>streaming favoritos</span> al mejor precio
+        </h1>
+        <p class="hero-desc">
+          Accede a Netflix, Spotify, Disney+ y mas servicios premium con entrega inmediata por WhatsApp. Cuentas 100% garantizadas.
+        </p>
+        <div class="hero-buttons">
+          <a href="#catalog" class="btn btn-primary">🛒 Ver Catalogo</a>
+          <a href="#contact" class="btn btn-secondary">💬 Contactar</a>
+        </div>
+        <div class="hero-stats">
+          <div class="hero-stat">
+            <div class="hero-stat-value">500+</div>
+            <div class="hero-stat-label">Clientes</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat-value">11+</div>
+            <div class="hero-stat-label">Servicios</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat-value">24/7</div>
+            <div class="hero-stat-label">Soporte</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== CARRUSEL PROMOCIONAL ========== -->
+  <section class="carousel-section">
+    <div class="container">
+      <div class="carousel-wrapper">
+        <div class="carousel-track" id="carousel-track"></div>
+      </div>
+      <div class="carousel-controls">
+        <button onclick="store.prevSlide()" aria-label="Slide anterior">◀</button>
+        <button onclick="store.nextSlide()" aria-label="Siguiente slide">▶</button>
+      </div>
+      <div class="carousel-dots" id="carousel-dots"></div>
+    </div>
+  </section>
+
+  <!-- ========== PRODUCTOS DESTACADOS ========== -->
+  <section class="products-section" id="featured">
+    <div class="container">
+      <h2 class="section-title">⭐ Productos Destacados</h2>
+      <div class="products-grid" id="featured-grid"></div>
+    </div>
+  </section>
+
+  <!-- ========== CATALOGO COMPLETO ========== -->
+  <section class="products-section" id="catalog">
+    <div class="container">
+      <h2 class="section-title">📦 Catalogo Completo</h2>
+
+      <!-- Filtros de Categoria -->
+      <div class="category-filters">
+        <button class="category-filter active" data-category="all" onclick="store.filterCategory('all')">Todos</button>
+        <button class="category-filter" data-category="streaming" onclick="store.filterCategory('streaming')">Streaming</button>
+        <button class="category-filter" data-category="musica" onclick="store.filterCategory('musica')">Musica</button>
+        <button class="category-filter" data-category="iptv" onclick="store.filterCategory('iptv')">IPTV</button>
+        <button class="category-filter" data-category="otros" onclick="store.filterCategory('otros')">Otros</button>
+      </div>
+
+      <!-- Grid de Productos -->
+      <div class="products-grid" id="products-grid"></div>
+    </div>
+  </section>
+
+  <!-- ========== OFERTAS ========== -->
+  <section class="offers-section" id="offers">
+    <div class="container">
+      <h2 class="section-title">🏷️ Ofertas Especiales</h2>
+      <div class="offers-grid">
+        <div class="offer-card">
+          <div class="offer-discount">50%</div>
+          <h3 class="offer-title">Primera Compra</h3>
+          <p class="offer-desc">Usa el cupon STREAMING50 en tu primera compra y obtener 50% de descuento.</p>
+        </div>
+        <div class="offer-card">
+          <div class="offer-discount">20%</div>
+          <h3 class="offer-title">Combo Familiar</h3>
+          <p class="offer-desc">Compra 3 o mas servicios y usa PROMO20 para un 20% de descuento adicional.</p>
+        </div>
+        <div class="offer-card">
+          <div class="offer-discount">15%</div>
+          <h3 class="offer-title">Nuevos Clientes</h3>
+          <p class="offer-desc">Bienvenido! Usa el cupon BIENVENIDO para 15% en cualquier producto.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FAQ ========== -->
+  <section class="faq-section" id="faq">
+    <div class="container">
+      <h2 class="section-title">❓ Preguntas Frecuentes</h2>
+      <div class="faq-list" id="faq-list"></div>
+    </div>
+  </section>
+
+  <!-- ========== TESTIMONIOS ========== -->
+  <section class="testimonials-section" id="testimonials">
+    <div class="container">
+      <h2 class="section-title">💬 Lo que dicen nuestros clientes</h2>
+      <div class="testimonials-grid" id="testimonials-grid"></div>
+    </div>
+  </section>
+
+  <!-- ========== CONTACTO ========== -->
+  <section class="contact-section" id="contact">
+    <div class="container">
+      <h2 class="section-title">📞 Contacto</h2>
+      <div class="contact-content">
+        <div class="contact-info">
+          <div class="contact-item">
+            <div class="contact-icon">💬</div>
+            <div>
+              <strong>WhatsApp</strong>
+              <p>Atencion inmediata 24/7</p>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">⚡</div>
+            <div>
+              <strong>Entrega Inmediata</strong>
+              <p>Recibe tus credenciales al instante</p>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">🛡️</div>
+            <div>
+              <strong>Garantia Total</strong>
+              <p>Reemplazo sin costo si hay problemas</p>
+            </div>
+          </div>
+        </div>
+        <div class="contact-info">
+          <div class="contact-item">
+            <div class="contact-icon">🏪</div>
+            <div>
+              <strong>Tu Tienda</strong>
+              <p>La mejor tienda de streaming</p>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">📱</div>
+            <div>
+              <strong>Redes Sociales</strong>
+              <p>Siguenos para ofertas exclusivas</p>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">🎯</div>
+            <div>
+              <strong>Pedidos Personalizados</strong>
+              <p>Consulta por cualquier servicio</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="#" class="logo">
+            <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+              <rect width="32" height="32" rx="6" fill="#e50914"/>
+              <path d="M8 24V8l8 8-8 8zm8 0V8l8 8-8 8z" fill="white"/>
+            </svg>
+            <span>Tu Tienda</span>
+          </a>
+          <p>Tu destino para cuentas y suscripciones de streaming premium. Precios imbatibles, entrega inmediata y soporte 24/7.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Servicios</h4>
+          <a href="#catalog">Netflix</a>
+          <a href="#catalog">Spotify</a>
+          <a href="#catalog">Disney+</a>
+          <a href="#catalog">Prime Video</a>
+          <a href="#catalog">IPTV</a>
+        </div>
+        <div class="footer-col">
+          <h4>Ayuda</h4>
+          <a href="#faq">Preguntas Frecuentes</a>
+          <a href="#contact">Contacto</a>
+          <a href="#offers">Ofertas</a>
+        </div>
+        <div class="footer-col">
+          <h4>Legal</h4>
+          <a href="#">Terminos de Uso</a>
+          <a href="#">Privacidad</a>
+          <a href="#">Politica de Reembolso</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2024 Tu Tienda. Todos los derechos reservados.</p>
+        <p>Hecho con ❤️ para los amantes del streaming</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ========== CARRITO LATERAL ========== -->
+  <div class="cart-overlay" id="cart-overlay"></div>
+  <aside class="cart-panel" id="cart-panel">
+    <div class="cart-header">
+      <h3>🛒 Mi Carrito</h3>
+      <button class="cart-close" onclick="store.toggleCart()" aria-label="Cerrar carrito">✕</button>
+    </div>
+    <div class="cart-items" id="cart-items">
+      <div class="cart-empty">
+        <span>🛒</span>
+        <p>Tu carrito esta vacio</p>
+      </div>
+    </div>
+    <div class="cart-footer">
+      <!-- Cupon -->
+      <div class="coupon-section">
+        <input type="text" id="coupon-input" placeholder="Codigo de cupon">
+        <button id="apply-coupon">Aplicar</button>
+      </div>
+      <!-- Totales -->
+      <div class="cart-totals">
+        <div class="cart-total-row">
+          <span>Subtotal</span>
+          <span id="cart-subtotal">$0</span>
+        </div>
+        <div class="cart-total-row">
+          <span>Descuento</span>
+          <span id="cart-discount">$0</span>
+        </div>
+        <div class="cart-total-row total">
+          <span>Total</span>
+          <span id="cart-total">$0</span>
+        </div>
+      </div>
+      <button class="btn btn-success" onclick="store.openCheckout()">💬 Finalizar Pedido por WhatsApp</button>
+      <button class="cart-clear" onclick="store.clearCart()">Vaciar carrito</button>
+    </div>
+  </aside>
+
+  <!-- ========== CHECKOUT MODAL ========== -->
+  <div class="checkout-modal" id="checkout-modal">
+    <div class="checkout-content">
+      <h3>📋 Datos para tu Pedido</h3>
+      <div class="checkout-form-group">
+        <label for="checkout-name">Nombre completo *</label>
+        <input type="text" id="checkout-name" placeholder="Tu nombre" required>
+      </div>
+      <div class="checkout-form-group">
+        <label for="checkout-phone">Telefono / WhatsApp *</label>
+        <input type="tel" id="checkout-phone" placeholder="Tu numero de telefono" required>
+      </div>
+      <div class="checkout-form-group">
+        <label for="checkout-email">Correo electronico</label>
+        <input type="email" id="checkout-email" placeholder="tu@correo.com">
+      </div>
+      <div style="display: flex; gap: 0.5rem; margin-top: 1rem;">
+        <button class="btn btn-success" onclick="store.sendWhatsApp()" style="flex:1;">💬 Enviar a WhatsApp</button>
+        <button class="btn btn-secondary" onclick="store.closeCheckout()">Cancelar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== PANEL ADMIN (OCULTO) ========== -->
+  <div class="admin-panel" id="admin-panel">
+    <div class="admin-header">
+      <h2>⚙️ Panel de Administracion</h2>
+      <button class="btn btn-secondary" onclick="store.hideAdminPanel()">✕ Cerrar</button>
+    </div>
+
+    <!-- Tabs -->
+    <div class="admin-tabs">
+      <button class="admin-tab active" data-tab="products" onclick="store.switchAdminTab('products')">Productos</button>
+      <button class="admin-tab" data-tab="add" onclick="store.switchAdminTab('add')">Agregar Producto</button>
+      <button class="admin-tab" data-tab="settings" onclick="store.switchAdminTab('settings')">Configuracion</button>
+    </div>
+
+    <div class="admin-content">
+      <!-- Seccion: Productos -->
+      <div class="admin-section active" id="admin-products">
+        <h3 style="margin-bottom: 1rem;">Gestionar Productos</h3>
+        <div class="admin-product-list" id="admin-product-list"></div>
+        <div style="margin-top: 1rem;">
+          <button class="btn btn-secondary" onclick="store.resetProducts()">🔄 Restaurar Predeterminados</button>
+        </div>
+      </div>
+
+      <!-- Seccion: Agregar Producto -->
+      <div class="admin-section" id="admin-add">
+        <h3 style="margin-bottom: 1rem;">Agregar Nuevo Producto</h3>
+        <div class="admin-form-group">
+          <label for="admin-new-name">Nombre *</label>
+          <input type="text" id="admin-new-name" placeholder="Nombre del producto">
+        </div>
+        <div class="admin-form-group">
+          <label for="admin-new-desc">Descripcion</label>
+          <textarea id="admin-new-desc" placeholder="Descripcion del producto"></textarea>
+        </div>
+        <div class="admin-form-group">
+          <label for="admin-new-price">Precio</label>
+          <input type="number" id="admin-new-price" placeholder="15000">
+        </div>
+        <div class="admin-form-group">
+          <label for="admin-new-original-price">Precio Original (antes)</label>
+          <input type="number" id="admin-new-original-price" placeholder="25000">
+        </div>
+        <div class="admin-form-group">
+          <label for="admin-new-category">Categoria</label>
+          <select id="admin-new-category">
+            <option value="streaming">Streaming</option>
+            <option value="musica">Musica</option>
+            <option value="iptv">IPTV</option>
+            <option value="otros">Otros</option>
+          </select>
+        </div>
+        <div class="admin-form-group">
+          <label for="admin-new-tags">Etiquetas (separadas por coma)</label>
+          <input type="text" id="admin-new-tags" placeholder="HD, Premium, Popular">
+        </div>
+        <button class="btn btn-primary" onclick="store.addProduct()">➕ Agregar Producto</button>
+      </div>
+
+      <!-- Seccion: Configuracion -->
+      <div class="admin-section" id="admin-settings">
+        <h3 style="margin-bottom: 1rem;">Configuracion General</h3>
+        <div class="admin-form-group">
+          <label for="admin-store-name">Nombre de la Tienda</label>
+          <input type="text" id="admin-store-name" placeholder="Tu Tienda">
+        </div>
+        <div class="admin-form-group">
+          <label for="admin-whatsapp">Numero de WhatsApp (con codigo de pais, sin +)</label>
+          <input type="text" id="admin-whatsapp" placeholder="573001234567">
+        </div>
+        <div class="admin-form-group">
+          <label for="admin-primary-color">Color Principal</label>
+          <input type="color" id="admin-primary-color" value="#e50914">
+        </div>
+        <button class="btn btn-primary" onclick="store.saveAdminSettings()">💾 Guardar Configuracion</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== NOTIFICACIONES ========== -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- ========== BOTON VOLVER ARRIBA ========== -->
+  <button class="back-to-top" aria-label="Volver arriba">↑</button>
+
+  <!-- ========== BOTON WHATSAPP FLOTANTE ========== -->
+  <a class="whatsapp-float" href="#contact" aria-label="Contactar por WhatsApp">💬</a>
+
+  <!-- Scripts -->
+  <script src="script.js"></script>
+</body>
+</html>
